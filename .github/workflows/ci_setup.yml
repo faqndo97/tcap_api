@@ -23,6 +23,8 @@ jobs:
       postgres:
         image: postgres:11
         ports: ["5432:5432"]
+        env:
+          POSTGRES_PASSWORD: postgres
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -39,7 +41,8 @@ jobs:
       - name: Setup test database
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:@localhost:5432/test
+          DATABASE_URL: postgres://postgres:@localhost:5432/tcap_api_test
+          TCAP_API_DATABASE_PASSWORD: postgres
         run: |
           bundle exec rails db:prepare
       - name: Run tests
