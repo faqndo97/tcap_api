@@ -1,0 +1,46 @@
+name: CI
+on: [push]
+
+jobs:
+  linters:
+    name: Linters
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+      - name: Install gems
+        run: |
+          bundle install --jobs 4 --retry 3
+      - name: Run linters
+        run: |
+          rubocop --parallel
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:11
+        env:
+          POSTGRES_USER: tcap_api_test
+          POSTGRES_DB: tcap_api_test
+          POSTGRES_PASSWORD: ""
+        ports: ["5432:5432"]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+      - name: Install gems
+        run: |
+          bundle install --jobs 4 --retry 3
+      - name: Setup test database
+        env:
+          RAILS_ENV: test
+          PGHOST: localhost
+          PGUSER: tcap_api_test
+        run: |
+          bin/rails db:setup
+      - name: Run tests
+        run: bin/rspec
