@@ -4,15 +4,23 @@ require 'test_helper'
 
 class StadiumsControllerTest < ActionDispatch::IntegrationTest
   test 'should get index' do
+    stadiums_mock = [build(:stadium)]
+
+    Stadium.expects(:all).returns(stadiums_mock)
+    StadiumSerializer.expects(:new).with(stadiums_mock).returns(stub('to_json_mock', to_json: true))
+
     get stadiums_url, as: :json
 
     assert_response :success
   end
 
   test 'should show stadium' do
-    stadium = create(:stadium)
+    stadium_mock = build_stubbed(:stadium)
 
-    get stadium_url(stadium), as: :json
+    Stadium.expects(:find).with(stadium_mock.id.to_s).returns(stadium_mock)
+    StadiumSerializer.expects(:new).with(stadium_mock).returns(stub('to_json_mock', to_json: true))
+
+    get stadium_url(stadium_mock), as: :json
 
     assert_response :success
   end

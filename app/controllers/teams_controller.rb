@@ -4,11 +4,11 @@ class TeamsController < ApplicationController
   def index
     @teams = Team.all
 
-    render json: @teams
+    render json: TeamSerializer.new(@teams).to_json
   end
 
   def show
-    render json: team
+    render json: TeamSerializer.new(team).to_json
   end
 
   private

@@ -4,15 +4,23 @@ require 'test_helper'
 
 class TeamsControllerTest < ActionDispatch::IntegrationTest
   test 'should get index' do
+    teams_mock = [build(:team)]
+
+    ::Team.expects(:all).returns(teams_mock)
+    ::TeamSerializer.expects(:new).with(teams_mock).returns(stub('to_json_mock', to_json: true))
+
     get teams_url, as: :json
 
     assert_response :success
   end
 
   test 'should show team' do
-    team = create(:team)
+    team_mock = build_stubbed(:team)
 
-    get team_url(team), as: :json
+    Team.expects(:find).with(team_mock.id.to_s).returns(team_mock)
+    ::TeamSerializer.expects(:new).with(team_mock).returns(stub('to_json_mock', to_json: true))
+
+    get team_url(team_mock), as: :json
 
     assert_response :success
   end
