@@ -4,11 +4,11 @@ class StadiumsController < ApplicationController
   def index
     @stadiums = Stadium.all
 
-    render json: @stadiums
+    render json: StadiumSerializer.new(@stadiums).to_json
   end
 
   def show
-    render json: stadium
+    render json: StadiumSerializer.new(stadium).to_json
   end
 
   private
