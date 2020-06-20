@@ -6,3 +6,4 @@ stadium = FactoryBot.create(:stadium)
 
 FactoryBot.create(:team)
 FactoryBot.create(:sector, stadium: stadium)
+FactoryBot.create(:sport)
