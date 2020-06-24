@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_20_221017) do
+ActiveRecord::Schema.define(version: 2020_06_22_022415) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "matches", force: :cascade do |t|
+    t.bigint "home_team_id", null: false
+    t.bigint "away_team_id", null: false
+    t.bigint "stadium_id", null: false
+    t.bigint "sport_id", null: false
+    t.datetime "start_date", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["away_team_id"], name: "index_matches_on_away_team_id"
+    t.index ["home_team_id"], name: "index_matches_on_home_team_id"
+    t.index ["sport_id"], name: "index_matches_on_sport_id"
+    t.index ["stadium_id"], name: "index_matches_on_stadium_id"
+  end
 
   create_table "sectors", force: :cascade do |t|
     t.string "name"
@@ -41,5 +55,8 @@ ActiveRecord::Schema.define(version: 2020_06_20_221017) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "matches", "stadiums"
+  add_foreign_key "matches", "teams", column: "away_team_id"
+  add_foreign_key "matches", "teams", column: "home_team_id"
   add_foreign_key "sectors", "stadiums"
 end
