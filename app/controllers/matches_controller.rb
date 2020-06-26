@@ -4,11 +4,11 @@ class MatchesController < ApplicationController
   def index
     matches = Match.all
 
-    render json: MatchSerializer.new(matches).to_json, status: :ok
+    render json: MatchSerializer.new(matches, include: params[:include]).to_json, status: :ok
   end
 
   def show
-    render json: MatchSerializer.new(match).to_json, status: :ok
+    render json: MatchSerializer.new(match, include: params[:include]).to_json, status: :ok
   end
 
   private

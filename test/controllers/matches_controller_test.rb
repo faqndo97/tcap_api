@@ -7,7 +7,7 @@ class MatchesControllerTest < ActionDispatch::IntegrationTest
     match_mock = [build(:match, :with_home_team, :with_away_team, :with_stadium, :with_sport)]
 
     Match.expects(:all).returns(match_mock)
-    MatchSerializer.expects(:new).with(match_mock).returns(stub('to_json_mock', to_json: true))
+    MatchSerializer.expects(:new).with(match_mock, include: nil).returns(stub('to_json_mock', to_json: true))
 
     get matches_url, as: :json
 
@@ -18,7 +18,7 @@ class MatchesControllerTest < ActionDispatch::IntegrationTest
     match_mock = build_stubbed(:match, :with_home_team, :with_away_team, :with_stadium, :with_sport)
 
     Match.expects(:find).with(match_mock.id.to_s).returns(match_mock)
-    MatchSerializer.expects(:new).with(match_mock).returns(stub('to_json_mock', to_json: true))
+    MatchSerializer.expects(:new).with(match_mock, include: nil).returns(stub('to_json_mock', to_json: true))
 
     get match_url(match_mock), as: :json
 

@@ -4,11 +4,11 @@ class SectorsController < ApplicationController
   def index
     @sectors = Sector.all
 
-    render json: SectorSerializer.new(@sectors).to_json
+    render json: SectorSerializer.new(@sectors, include: params[:include]).to_json
   end
 
   def show
-    render json: SectorSerializer.new(sector).to_json
+    render json: SectorSerializer.new(sector, include: params[:include]).to_json
   end
 
   private

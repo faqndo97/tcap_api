@@ -7,7 +7,7 @@ class StadiumsControllerTest < ActionDispatch::IntegrationTest
     stadiums_mock = [build(:stadium)]
 
     Stadium.expects(:all).returns(stadiums_mock)
-    StadiumSerializer.expects(:new).with(stadiums_mock).returns(stub('to_json_mock', to_json: true))
+    StadiumSerializer.expects(:new).with(stadiums_mock, include: nil).returns(stub('to_json_mock', to_json: true))
 
     get stadiums_url, as: :json
 
@@ -18,7 +18,7 @@ class StadiumsControllerTest < ActionDispatch::IntegrationTest
     stadium_mock = build_stubbed(:stadium)
 
     Stadium.expects(:find).with(stadium_mock.id.to_s).returns(stadium_mock)
-    StadiumSerializer.expects(:new).with(stadium_mock).returns(stub('to_json_mock', to_json: true))
+    StadiumSerializer.expects(:new).with(stadium_mock, include: nil).returns(stub('to_json_mock', to_json: true))
 
     get stadium_url(stadium_mock), as: :json
 
