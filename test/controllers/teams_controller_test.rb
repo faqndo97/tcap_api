@@ -7,7 +7,7 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
     teams_mock = [build(:team)]
 
     ::Team.expects(:all).returns(teams_mock)
-    ::TeamSerializer.expects(:new).with(teams_mock).returns(stub('to_json_mock', to_json: true))
+    ::TeamSerializer.expects(:new).with(teams_mock, include: nil).returns(stub('to_json_mock', to_json: true))
 
     get teams_url, as: :json
 
@@ -18,7 +18,7 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
     team_mock = build_stubbed(:team)
 
     Team.expects(:find).with(team_mock.id.to_s).returns(team_mock)
-    ::TeamSerializer.expects(:new).with(team_mock).returns(stub('to_json_mock', to_json: true))
+    ::TeamSerializer.expects(:new).with(team_mock, include: nil).returns(stub('to_json_mock', to_json: true))
 
     get team_url(team_mock), as: :json
 
