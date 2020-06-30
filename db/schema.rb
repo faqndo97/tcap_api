@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(version: 2020_07_04_113451) do
     t.index ["stadium_id"], name: "index_matches_on_stadium_id"
   end
 
+  create_table "matches_sectors", id: false, force: :cascade do |t|
+    t.bigint "match_id", null: false
+    t.bigint "sector_id", null: false
+    t.integer "total_tickets", default: 0, null: false
+    t.integer "available_tickets", default: 0, null: false
+    t.index ["match_id", "sector_id"], name: "index_matches_sectors_on_match_id_and_sector_id"
+    t.index ["sector_id", "match_id"], name: "index_matches_sectors_on_sector_id_and_match_id"
+  end
+
   create_table "sectors", force: :cascade do |t|
     t.string "name"
     t.bigint "stadium_id", null: false
