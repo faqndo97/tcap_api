@@ -6,5 +6,8 @@ class Match < ApplicationRecord
   belongs_to :sport
   belongs_to :stadium, class_name: 'Stadium'
 
+  has_many :match_sectors, class_name: 'MatchSectors'
+  has_many :sectors, through: :match_sectors
+
   validates :start_date, presence: true
 end
