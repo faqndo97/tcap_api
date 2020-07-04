@@ -2,12 +2,27 @@
 
 FactoryBot.find_definitions
 
-stadium = FactoryBot.create(:stadium)
+stadium = FactoryBot.create(:stadium) unless Stadium.count.positive?
 
-FactoryBot.create(:team) # create penarol
-FactoryBot.create(:team, name: 'Nacional', shield_url: 'https://tcap-api.herokuapp.com/shields/nacional.png')
-FactoryBot.create(:team, name: 'Defensor', shield_url: 'https://tcap-api.herokuapp.com/shields/defensor.png')
-FactoryBot.create(:team, name: 'Danubio', shield_url: 'https://tcap-api.herokuapp.com/shields/danubio.png')
-FactoryBot.create(:sector, stadium: stadium)
-FactoryBot.create(:sport)
-FactoryBot.create(:match, :with_home_team, :with_away_team, :with_stadium, :with_sport)
+penarol = FactoryBot.create(:team) unless Team.exists?('Peñarol')
+
+unless Team.exists?('Nacional')
+  nacional = FactoryBot.create(:team, name: 'Nacional', shield_url: 'https://tcap-api.herokuapp.com/shields/nacional.png')
+end
+
+unless Team.exists?('Defensor')
+  defensor = FactoryBot.create(:team, name: 'Defensor', shield_url: 'https://tcap-api.herokuapp.com/shields/defensor.png')
+end
+
+unless Team.exists?('Danubio')
+  danubio = FactoryBot.create(:team, name: 'Danubio', shield_url: 'https://tcap-api.herokuapp.com/shields/danubio.png')
+end
+
+FactoryBot.create(:sector, stadium: stadium) unless Sector.count.positive?
+FactoryBot.create(:sport) unless Sport.count.positive?
+
+unless Match.count.positive?
+  FactoryBot.create(:match, :with_stadium, :with_sport, home_team: penarol, away_team: nacional)
+  FactoryBot.create(:match, :with_stadium, :with_sport, home_team: penarol, away_team: defensor)
+  FactoryBot.create(:match, :with_stadium, :with_sport, home_team: penarol, away_team: danubio)
+end
