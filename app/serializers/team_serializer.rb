@@ -3,5 +3,5 @@
 class TeamSerializer
   include FastJsonapi::ObjectSerializer
 
-  attributes :name
+  attributes :name, :shield_url
 end
