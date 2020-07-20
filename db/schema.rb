@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2020_07_04_113451) do
     t.bigint "sector_id", null: false
     t.integer "total_tickets", default: 0, null: false
     t.integer "available_tickets", default: 0, null: false
+    t.date "available_tickets_from", null: false
     t.index ["match_id", "sector_id"], name: "index_matches_sectors_on_match_id_and_sector_id"
     t.index ["sector_id", "match_id"], name: "index_matches_sectors_on_sector_id_and_match_id"
   end

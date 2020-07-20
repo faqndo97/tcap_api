@@ -5,4 +5,6 @@ class MatchSectors < ApplicationRecord
 
   belongs_to :match
   belongs_to :sector
+
+  validates :available_tickets_from, presence: true
 end
