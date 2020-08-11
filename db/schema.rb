@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_04_113451) do
+ActiveRecord::Schema.define(version: 2020_08_11_145814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 2020_07_04_113451) do
     t.datetime "start_date", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.date "available_tickets_from", null: false
     t.index ["away_team_id"], name: "index_matches_on_away_team_id"
     t.index ["home_team_id"], name: "index_matches_on_home_team_id"
     t.index ["sport_id"], name: "index_matches_on_sport_id"
@@ -34,7 +35,6 @@ ActiveRecord::Schema.define(version: 2020_07_04_113451) do
     t.bigint "sector_id", null: false
     t.integer "total_tickets", default: 0, null: false
     t.integer "available_tickets", default: 0, null: false
-    t.date "available_tickets_from", null: false
     t.index ["match_id", "sector_id"], name: "index_matches_sectors_on_match_id_and_sector_id"
     t.index ["sector_id", "match_id"], name: "index_matches_sectors_on_sector_id_and_match_id"
   end

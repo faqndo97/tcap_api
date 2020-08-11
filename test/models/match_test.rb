@@ -37,4 +37,11 @@ class MatchTest < ActiveSupport::TestCase
     refute match.valid?
     assert_equal 'must exist', match.errors.messages[:stadium].first
   end
+
+  test 'should validate available_tickets_from' do
+    match = Match.new
+
+    refute match.valid?
+    assert_equal "can't be blank", match.errors.messages[:available_tickets_from].first
+  end
 end

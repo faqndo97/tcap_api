@@ -3,7 +3,7 @@
 class MatchSerializer
   include FastJsonapi::ObjectSerializer
 
-  attributes :start_date
+  attributes :start_date, :available_tickets_from
 
   belongs_to :home_team, serializer: TeamSerializer
   belongs_to :away_team, serializer: TeamSerializer

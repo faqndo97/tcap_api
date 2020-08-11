@@ -10,4 +10,5 @@ class Match < ApplicationRecord
   has_many :sectors, through: :match_sectors
 
   validates :start_date, presence: true
+  validates :available_tickets_from, presence: true
 end

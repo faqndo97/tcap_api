@@ -3,6 +3,7 @@
 FactoryBot.define do
   factory :match do
     start_date { Time.now + 5.days }
+    available_tickets_from { Time.now + 3.days }
   end
 
   trait :with_home_team do

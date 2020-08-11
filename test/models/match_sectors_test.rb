@@ -16,11 +16,4 @@ class MatchSectorsTest < ActiveSupport::TestCase
     refute match_sector.valid?
     assert_equal 'must exist', match_sector.errors.messages[:sector].first
   end
-
-  test 'should validate available_tickets_from' do
-    match_sector = MatchSectors.new
-
-    refute match_sector.valid?
-    assert_equal "can't be blank", match_sector.errors.messages[:available_tickets_from].first
-  end
 end
