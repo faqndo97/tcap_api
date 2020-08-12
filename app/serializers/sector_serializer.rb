@@ -5,5 +5,5 @@ class SectorSerializer
 
   belongs_to :stadium
 
-  attributes :name
+  attributes :name, :total_tickets, :available_tickets
 end
