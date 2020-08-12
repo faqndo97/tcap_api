@@ -44,4 +44,10 @@ class MatchTest < ActiveSupport::TestCase
     refute match.valid?
     assert_equal "can't be blank", match.errors.messages[:available_tickets_from].first
   end
+
+  test 'sectors association should has a default scope adding matches sectors columns' do
+    match = Match.new
+
+    assert_match 'SELECT matches_sectors.*, sectors.*', match.sectors.to_sql
+  end
 end
