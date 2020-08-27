@@ -23,5 +23,7 @@ module TcapApi
     config.load_defaults 6.0
 
     config.api_only = true
+
+    config.time_zone = 'Montevideo'
   end
 end
