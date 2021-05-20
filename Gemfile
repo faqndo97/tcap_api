@@ -9,7 +9,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'factory_bot'
 gem 'fast_jsonapi', git: 'https://github.com/fast-jsonapi/fast_jsonapi'
 gem 'pg', '>= 0.18', '< 2.0'
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.3'
 gem 'rack-cors', '~> 1.1'
 gem 'rails', '~> 6.0.3'
 gem 'rails_param'
